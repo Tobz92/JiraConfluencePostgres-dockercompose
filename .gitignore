@@ -1,0 +1,4 @@
+jira/
+postgres_data/
+confluence/
+.env
