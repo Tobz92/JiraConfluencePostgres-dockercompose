@@ -28,7 +28,7 @@ To connect on the postgres database from your machine, use the following paramet
 
 # Jump on containers
 
-If want to jump on the Jira and Confluence Container from your machine:
+If you want to jump on the Jira and Confluence Container from your machine:
 ### Confluence container
 ```
 docker-exec -ti confluence_container /bin/bash
