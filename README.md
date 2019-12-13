@@ -23,6 +23,7 @@ To connect on the postgres database from your machine, use the following paramet
 - Username: defined in .env
 - Password: defined in .env
 - Hostname: postgres_db_jira
+- Database: defined in docker-compose.yml
 - Port: 40699
 
 # Jump on containers
