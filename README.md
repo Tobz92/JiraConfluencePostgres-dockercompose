@@ -39,5 +39,5 @@ docker-exec -ti jira_container /bin/bash
 
 # Todos
 - [x] Add setup steps
-- [] Mounting currently not working on Windows machine
-- [] Document to use Jira Users in Confluence
+- [ ] Mounting currently not working on Windows machine
+- [ ] Document to use Jira Users in Confluence
