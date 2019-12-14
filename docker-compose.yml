@@ -3,8 +3,10 @@ version: '3'
 services:
   jira_container:
     container_name: jira_container
+    depends_on:
+      - postgres_db_jira
     restart: always
-    image: atlassian/jira-software
+    build: ./jira_stuff
     ports:
       - 8080:8080
     volumes:
@@ -18,11 +20,14 @@ services:
     networks:
       atlassian_network:
         ipv4_address: 172.28.1.1
+    command: ["/usr/wait-for-it.sh", "postgres_db_jira:5432", "--strict" , "--timeout=300" , "--" , "/bin/bash /opt/atlassian/jira/bin/start-jira.sh -fg"]
 
   confluence_container:
     restart: always
     container_name: confluence_container
-    image: atlassian/confluence-server
+    depends_on:
+      - postgres_db_jira
+    build: ./confluence_stuff
     ports:
       - 8090:8090
       - 8091:8091
@@ -37,15 +42,16 @@ services:
     networks:
       atlassian_network:
         ipv4_address: 172.28.1.2
+    command: ["/usr/wait-for-it.sh", "postgres_db_jira:5432", "--strict" , "--timeout=300" , "--" , "/bin/bash /opt/atlassian/confluence/bin/start-confluence.sh -fg'"]
 
   postgres_db_jira:
     container_name: postgres_db
-    image: postgres:9.6-alpine
+    build: ./postgres_stuff
     ports:
       - 40699:5432
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
-      - ./postgres_dbs_script:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+      # - postgres_dbs_script:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_USER: "${DBUSER}"
       POSTGRES_PASSWORD: "${DBPASSWORD}"
@@ -55,6 +61,9 @@ services:
     networks:
       atlassian_network:
         ipv4_address: 172.28.1.3
+
+volumes:
+  postgres_data:
 
 networks:
   atlassian_network:
