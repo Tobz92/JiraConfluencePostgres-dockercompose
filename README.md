@@ -22,7 +22,7 @@ docker-compose build && docker-compose up
 To connect on the postgres database from your machine, use the following parameters:
 - Username: defined in .env
 - Password: defined in .env
-- Hostname: postgres_db_jira
+- Hostname: localhost
 - Database: defined in docker-compose.yml
 - Port: 40699
 
