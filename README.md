@@ -13,7 +13,7 @@ This project is aimed to setup a working environment with Jira, Confluence and P
 * If you are using Docker for Windows, make sure your drive is shared.
 * In your project folder execute following statements:
 ```
-docker-compose build && docker-compose up
+docker-compose up
 ```
 * Confluence running on localhost:8090 and Jira running on localhost:8080 and setup steps can be peformed on first start
 
